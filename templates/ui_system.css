@@ -1,0 +1,296 @@
+/* ==========================================================================
+   BILIMHUB UI SYSTEM - PURE CSS & BEM METHODOLOGY
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Ranglar palitrasi */
+  --color-primary: #2563EB;
+  --color-secondary: #1E40AF;
+  --color-bg: #F8FAFC;
+  --color-card-bg: #FFFFFF;
+  --color-text-main: #1E293B;
+  --color-text-muted: #64748B;
+  --color-border: #E2E8F0;
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+
+  /* O'lchamlar va Radiuslar */
+  --radius-card: 12px;
+  --radius-btn: 8px;
+  --radius-input: 6px;
+
+  /* Soyalar */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  /* Bo'shliqlar (Spacing) */
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+
+  /* Boshqa sozlamalar */
+  --transition: all 0.2s ease;
+  --font-base: 'Inter', sans-serif;
+}
+
+/* ==========================================================================
+   RESET VA ASOSIY SOZLAMALAR
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   TUGMALAR (BUTTONS) - .btn
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-base);
+  border-radius: var(--radius-btn);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  position: relative;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.btn--primary:hover:not(:disabled) {
+  background-color: var(--color-secondary);
+}
+
+.btn--primary:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.btn--outline {
+  background-color: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text-main);
+}
+
+.btn--outline:hover:not(:disabled) {
+  background-color: var(--color-bg);
+  border-color: #CBD5E1;
+}
+
+/* ==========================================================================
+   KIRITISH MAYDONLARI (INPUTS) - .form-group, .form-input
+   ========================================================================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: var(--space-md);
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-main);
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: var(--font-base);
+  color: var(--color-text-main);
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  transition: var(--transition);
+}
+
+.form-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.form-input:hover {
+  border-color: #CBD5E1;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* ==========================================================================
+   KARTALAR (CARDS) - .card
+   ========================================================================== */
+.card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  height: 100%;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.card__description {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-md);
+  margin-top: auto;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ==========================================================================
+   BO'SH HOLAT (EMPTY STATE) - .empty-state
+   ========================================================================== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px var(--space-lg);
+  background-color: var(--color-card-bg);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-card);
+  gap: var(--space-md);
+}
+
+.empty-state__icon {
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.empty-state__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.empty-state__desc {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  max-width: 320px;
+}
+
+/* ==========================================================================
+   YUKLANISH HOLATI (LOADING STATE) - .spinner, .is-loading
+   ========================================================================== */
+.loading-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  gap: 12px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  flex-grow: 1;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Tugma ichidagi loading holati */
+.btn.is-loading {
+  color: transparent;
+  pointer-events: none;
+}
+
+.btn.is-loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ==========================================================================
+   RESPONSIVE GRID TIZIMI
+   ========================================================================== */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Tablet uchun */
+@media (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop uchun */
+@media (min-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

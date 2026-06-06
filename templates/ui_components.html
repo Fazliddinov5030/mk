@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BilimHub - UI Komponentlar Tizimi</title>
+    
+    <!-- BEM CSS fayli -->
+    <link rel="stylesheet" href="{% static 'css/ui_system.css' %}">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <div class="grid-container">
+        
+        <!-- 1. STANDART KARTA VA FORMALAR -->
+        <article class="card">
+            <div class="card__header">
+                <h3 class="card__title">Shaxsiy ma'lumotlar</h3>
+                <p class="card__description">Tizimdagi profilingizni yangilang.</p>
+            </div>
+            
+            <div class="card__body">
+                <div class="form-group">
+                    <label class="form-label" for="email">Elektron pochta</label>
+                    <input class="form-input" type="email" id="email" placeholder="name@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Parol</label>
+                    <input class="form-input" type="password" id="password" placeholder="••••••••">
+                </div>
+            </div>
+            
+            <div class="card__footer">
+                <button class="btn btn--outline">Bekor qilish</button>
+                <button class="btn btn--primary">Saqlash</button>
+            </div>
+        </article>
+
+        <!-- 2. YUKLANISH (LOADING) HOLATI KARTASI -->
+        <article class="card">
+            <div class="card__header">
+                <h3 class="card__title">To'lov holati</h3>
+                <p class="card__description">Tranzaksiya ma'lumotlari qayta ishlanmoqda.</p>
+            </div>
+            
+            <div class="loading-overlay">
+                <div class="spinner"></div>
+                <span>Server bilan bog'lanilmoqda...</span>
+            </div>
+            
+            <div class="card__footer">
+                <button class="btn btn--primary is-loading">Tasdiqlash</button>
+            </div>
+        </article>
+
+        <!-- 3. BO'SH HOLAT (EMPTY STATE) -->
+        <div class="empty-state">
+            <!-- Lucide ikonka -->
+            <i data-lucide="inbox" class="empty-state__icon" width="48" height="48" stroke-width="1.5"></i>
+            
+            <h3 class="empty-state__title">Hozircha kurslar yo'q</h3>
+            <p class="empty-state__desc">Siz hali hech qanday kursga yozilmagansiz. Yangi bilimlarni kashf etishni boshlang.</p>
+            
+            <button class="btn btn--primary">
+                <i data-lucide="plus" width="16" height="16"></i>
+                Kurs izlash
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Ikonkalarni ishga tushirish -->
+    <script>lucide.createIcons();</script>
+</body>
+</html>

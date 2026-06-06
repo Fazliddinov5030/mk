@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="font-sans max-w-3xl mx-auto py-8 px-4 h-[85vh] flex flex-col">
+    
+    <!-- Chat Header -->
+    <div class="pb-4 border-b border-gray-100 mb-4 text-center flex-shrink-0">
+        <h2 class="text-lg font-semibold text-gray-900">Kurs Chat oynasi</h2>
+        <p class="text-xs text-gray-500 mt-1">Real-time muloqot</p>
+    </div>
+    
+    <!-- Xabarlar Maydoni -->
+    <div id="chat-messages" class="flex-1 overflow-y-auto space-y-4 p-6 rounded-3xl border border-gray-100 bg-slate-50 shadow-inner">
+        <!-- O'qituvchi / Boshqa Foydalanuvchi xabari (Chap tomon) -->
+        <div class="flex justify-start">
+            <div class="bg-white border border-gray-100 text-gray-800 px-5 py-3 rounded-2xl rounded-tl-sm max-w-[80%] text-sm leading-relaxed shadow-sm">
+                Assalomu alaykum! Bugungi dars bo'yicha qandaydir savollaringiz bormi?
+            </div>
+        </div>
+        <!-- Talaba / Sizning xabaringiz (O'ng tomon) -->
+        <div class="flex justify-end">
+            <div class="bg-indigo-600 text-white px-5 py-3 rounded-2xl rounded-tr-sm max-w-[80%] text-sm leading-relaxed shadow-md">
+                Va alaykum assalom. Ustoz, 3-modulning uy vazifasini qachon tekshirasiz?
+            </div>
+        </div>
+    </div>
+
+    <!-- Xabar yuborish maydoni -->
+    <div class="mt-4 border-t border-gray-100 pt-4 flex-shrink-0">
+        <form id="chat-form" class="flex gap-4">
+            <input type="text" id="chat-input" placeholder="Xabaringizni yozing..." class="flex-1 px-5 py-3 rounded-2xl border border-gray-200 bg-slate-50 outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all text-sm">
+            <button type="submit" class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-2xl text-sm shadow-sm transition-all transform hover:-translate-y-0.5">Yuborish</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

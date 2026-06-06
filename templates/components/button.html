@@ -1,0 +1,23 @@
+{% comment %}Reusable button component.
+Parameters:
+ - is_link (bool): when true renders an <a>, otherwise a <button>.
+ - href: URL for link buttons
+ - label: button text
+ - button_type: for <button> (submit, button)
+ - classes: additional CSS classes
+ - icon: optional SVG string (rendered before label)
+ - icon_position: 'left' or 'right'
+{% endcomment %}
+{% if is_link %}
+<a href="{{ href }}" class="{{ classes|default:'inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium transition' }}">
+    {% if icon and icon_position != 'right' %}{{ icon|safe }}{% endif %}
+    <span class="mx-2">{{ label }}</span>
+    {% if icon and icon_position == 'right' %}{{ icon|safe }}{% endif %}
+</a>
+{% else %}
+<button type="{{ button_type|default:'button' }}" class="{{ classes|default:'inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium transition' }}">
+    {% if icon and icon_position != 'right' %}{{ icon|safe }}{% endif %}
+    <span class="mx-2">{{ label }}</span>
+    {% if icon and icon_position == 'right' %}{{ icon|safe }}{% endif %}
+</button>
+{% endif %}

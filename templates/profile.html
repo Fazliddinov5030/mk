@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="font-sans bg-gray-50 min-h-screen py-12 px-6">
+    <div class="max-w-4xl mx-auto space-y-8">
+        
+        <!-- Sarlavha -->
+        <div>
+            <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Mening Profilim</h1>
+            <p class="mt-2 text-sm text-slate-500">Shaxsiy ma'lumotlaringizni va xavfsizlik sozlamalarini boshqaring.</p>
+        </div>
+
+        <!-- Profil Qisqacha Ma'lumoti (Avatar va Ism) -->
+        <div class="bg-white border border-slate-100 rounded-3xl p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row items-center gap-6">
+            <!-- Avatar -->
+            <div class="w-24 h-24 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-3xl font-bold shrink-0">
+                A
+            </div>
+            <div class="flex-1 text-center md:text-left">
+                <h2 class="text-2xl font-semibold text-slate-900">Abdulla Aliyev</h2>
+                <p class="text-slate-500 mt-1">abdulla@example.com</p>
+                <div class="mt-3 inline-block px-4 py-1.5 bg-green-50 border border-green-200 text-green-700 text-xs font-semibold tracking-wide rounded-full uppercase">
+                    Talaba
+                </div>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <button type="button" class="px-6 py-3 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-medium rounded-xl transition-colors shadow-sm">
+                    Rasm yuklash
+                </button>
+            </div>
+        </div>
+
+        <!-- Shaxsiy Ma'lumotlar Formasi -->
+        <div class="bg-white border border-slate-100 rounded-3xl p-8 shadow-sm hover:shadow-md transition-all duration-300">
+            <h3 class="text-xl font-semibold text-slate-900 mb-6">Shaxsiy ma'lumotlar</h3>
+            <form action="" method="POST" class="space-y-6">
+                {% csrf_token %}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Ism</label>
+                        <input type="text" name="first_name" value="Abdulla" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-100 transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Familiya</label>
+                        <input type="text" name="last_name" value="Aliyev" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-100 transition-all">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Elektron pochta</label>
+                        <input type="email" name="email" value="abdulla@example.com" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-100 transition-all">
+                    </div>
+                </div>
+                <div class="flex justify-end pt-4 border-t border-slate-100 mt-6">
+                    <button type="submit" class="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                        Saqlash
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Xavfsizlik Formasi -->
+        <div class="bg-white border border-slate-100 rounded-3xl p-8 shadow-sm hover:shadow-md transition-all duration-300">
+            <h3 class="text-xl font-semibold text-slate-900 mb-6">Xavfsizlik va Parol</h3>
+            <form action="" method="POST" class="space-y-6">
+                {% csrf_token %}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Yangi parol</label>
+                        <input type="password" name="new_password"  class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-100 transition-all">
+                    </div>
+                </div>
+                <div class="flex justify-start pt-4 mt-2">
+                    <button type="submit" class="px-6 py-3.5 bg-slate-900 hover:bg-black text-white font-medium rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                        Parolni yangilash
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

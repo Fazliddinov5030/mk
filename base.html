@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BilimHub{% endblock %}</title>
+    <!-- Tailwind CSS CDN (Development Only - For Production, use local build) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind CSS konfiguratsiyasi (agar kerak bo'lsa)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-900 flex flex-col min-h-screen">
+    {% include 'components/_navbar.html' %}
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+    {% include 'components/_footer.html' %}
+</body>
+</html>

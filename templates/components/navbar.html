@@ -1,0 +1,18 @@
+<nav class="bg-white border-b border-gray-100 sticky top-0 z-50 font-sans">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/" class="text-xl font-bold text-gray-900">BilimHub</a>
+
+        <div class="flex items-center space-x-6 text-sm text-gray-500 font-medium">
+            <a href="{% url 'course_list' %}" class="hover:text-gray-900 transition-colors">Kurslar</a>
+            <a href="{% url 'dashboard' %}" class="hover:text-gray-900 transition-colors">Dashboard</a>
+            <a href="{% url 'profile' %}" class="hover:text-gray-900 transition-colors">Profil</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+            {% url 'login' as login_url %}
+            {% url 'register' as register_url %}
+            {% include 'components/button.html' with is_link=True href=login_url label='Kirish' classes='px-4 py-2 rounded-full border border-gray-200 text-sm text-gray-700 hover:bg-gray-100' %}
+            {% include 'components/button.html' with is_link=True href=register_url label="Ro'yxatdan o'tish" classes='px-4 py-2 rounded-full bg-gray-900 text-white text-sm hover:bg-black' %}
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BilimHub</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+    
+    <!-- Navbar barcha sahifalar uchun -->
+    {% include 'components/navbar.html' %}
+
+    <!-- Global messages -->
+    <div class="max-w-4xl mx-auto px-4 mt-6">
+        {% if messages %}
+            <div class="space-y-2">
+                {% for message in messages %}
+                    <div class="rounded-lg px-4 py-3 text-sm {% if message.tags %}{{ message.tags }}{% endif %} bg-gray-100 text-gray-800">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>
