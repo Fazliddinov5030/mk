@@ -9,11 +9,12 @@ from .models import Enrollment
 from .serializers import EnrollmentSerializer, EnrollSerializer, LessonProgressSerializer
 from .services import EnrollmentService
 from .exceptions import AlreadyEnrolledError, CourseNotPublishedError
+from courses.permissions import IsStudent
 
 logger = logging.getLogger(__name__)
 
 class EnrollmentViewSet(GenericViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, IsStudent)
 
     def get_queryset(self):
         return Enrollment.objects.filter(
@@ -28,7 +29,7 @@ class EnrollmentViewSet(GenericViewSet):
 
         try:
             course = Course.objects.get(id=serializer.validated_data['course_id'])
-            enrollment = EnrollmentService.enroll(request.user, course)
+            enrollment = EnrollmentService.enroll_user(request.user, course)
             return Response(
                 EnrollmentSerializer(enrollment).data,
                 status=status.HTTP_201_CREATED
@@ -60,4 +61,3 @@ class EnrollmentViewSet(GenericViewSet):
             watched_seconds=serializer.validated_data['watched_seconds']
         )
         return Response({'message': 'Progress saqlandi'})
-

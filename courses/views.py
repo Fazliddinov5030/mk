@@ -7,6 +7,7 @@ from .models import Course, Category, Module, Lesson
 from .serializers import CourseSerializer, CategorySerializer, ModuleSerializer, LessonSerializer
 from enrollments.serializers import EnrollmentSerializer # Yoki CourseSerializer
 from book.services import SearchEngine
+from .permissions import IsOwnerOrReadOnly, IsInstructorOrReadOnly
 
 class CourseListView(generics.ListAPIView):
     queryset = Course.objects.all()
@@ -40,10 +41,10 @@ class CourseStatsView(generics.GenericAPIView):
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsInstructorOrReadOnly, IsOwnerOrReadOnly]
     
     def perform_create(self, serializer):
-        super().perform_create(serializer)
+        serializer.save(instructor=self.request.user)
         cache.delete('global_course_stats') # Cache invalidation
 
     def perform_destroy(self, instance):

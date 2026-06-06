@@ -4,13 +4,13 @@ from .models import Category, Course, Module, Lesson
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name', 'slug')
+        fields = ('id', 'name')
 
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
-        fields = ('id', 'title', 'duration_seconds', 'is_free_preview', 'order')
+        fields = ('id', 'title', 'content', 'order')
 
 
 class ModuleSerializer(serializers.ModelSerializer):
@@ -27,7 +27,9 @@ class CourseSerializer(serializers.ModelSerializer):
     category_id = serializers.PrimaryKeyRelatedField(
         queryset=Category.objects.all(),
         source='category',
-        write_only=True
+        write_only=True,
+        allow_null=True,
+        required=False
     )
     modules = ModuleSerializer(many=True, read_only=True)
 
@@ -35,7 +37,8 @@ class CourseSerializer(serializers.ModelSerializer):
         model = Course
         fields = (
             'id', 'title', 'slug', 'description',
-            'price', 'level', 'status', 'instructor',
-            'category', 'category_id', 'modules'
+            'price', 'status', 'instructor',
+            'category', 'category_id', 'modules',
+            'created_at', 'updated_at'
         )
-        read_only_fields = ('slug', 'instructor')
+        read_only_fields = ('slug', 'instructor', 'created_at', 'updated_at')

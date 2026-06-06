@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BILIMHUB UI SYSTEM - PURE CSS & BEM METHODOLOGY
+   LUMI UI SYSTEM - PURE CSS & BEM METHODOLOGY
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -305,14 +305,12 @@ body {
   margin: 0 auto;
 }
 
-/* Tablet uchun */
 @media (min-width: 768px) {
   .grid-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Desktop uchun */
 @media (min-width: 1024px) {
   .grid-container {
     grid-template-columns: repeat(3, 1fr);

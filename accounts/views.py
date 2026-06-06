@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
@@ -22,7 +22,7 @@ class RegisterView(generics.CreateAPIView):
             'user': UserSerializer(user).data,
             'access': str(refresh.access_token),
             'refresh': str(refresh),
-        })
+        }, status=status.HTTP_201_CREATED)
 
 
 class MeView(generics.RetrieveUpdateAPIView):
