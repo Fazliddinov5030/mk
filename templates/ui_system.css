@@ -73,23 +73,47 @@ body {
   position: relative;
 }
 
+.btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
 .btn--primary {
-  background-color: var(--color-primary);
+  background-color: var(--color-text-main);
   color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.07);
 }
 
 .btn--primary:hover:not(:disabled) {
-  background-color: var(--color-secondary);
+  background-color: #0F172A;
 }
 
 .btn--primary:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid rgba(59, 130, 246, 0.45);
   outline-offset: 2px;
+}
+
+.btn--ghost {
+  background-color: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text-main);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background-color: rgba(15, 23, 42, 0.04);
 }
 
 .btn--outline {

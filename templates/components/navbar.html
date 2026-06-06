@@ -11,8 +11,8 @@
         <div class="flex items-center gap-3">
             {% url 'login' as login_url %}
             {% url 'register' as register_url %}
-            {% include 'components/button.html' with is_link=True href=login_url label='Kirish' classes='px-4 py-2 rounded-full border border-gray-200 text-sm text-gray-700 hover:bg-gray-100' %}
-            {% include 'components/button.html' with is_link=True href=register_url label="Ro'yxatdan o'tish" classes='px-4 py-2 rounded-full bg-gray-900 text-white text-sm hover:bg-black' %}
+            {% include 'components/button.html' with is_link=True href=login_url label='Kirish' classes='btn btn--ghost rounded-full px-4 py-2 text-sm' %}
+            {% include 'components/button.html' with is_link=True href=register_url label="Ro'yxatdan o'tish" classes='btn btn--primary rounded-full px-4 py-2 text-sm' %}
         </div>
     </div>
 </nav>
