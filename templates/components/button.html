@@ -9,15 +9,15 @@ Parameters:
  - icon_position: 'left' or 'right'
 {% endcomment %}
 {% if is_link %}
-<a href="{{ href }}" class="{{ classes|default:'btn btn--primary' }}">
-    {% if icon and icon_position != 'right' %}<span class="btn__icon">{{ icon|safe }}</span>{% endif %}
+<a href="{{ href }}" class="{{ classes|default:'btn btn--primary' }}" role="button">
+    {% if icon and icon_position != 'right' %}<span class="btn__icon" aria-hidden="true">{{ icon|safe }}</span>{% endif %}
     <span class="btn__label">{{ label }}</span>
-    {% if icon and icon_position == 'right' %}<span class="btn__icon">{{ icon|safe }}</span>{% endif %}
+    {% if icon and icon_position == 'right' %}<span class="btn__icon" aria-hidden="true">{{ icon|safe }}</span>{% endif %}
 </a>
 {% else %}
 <button type="{{ button_type|default:'button' }}" class="{{ classes|default:'btn btn--primary' }}">
-    {% if icon and icon_position != 'right' %}<span class="btn__icon">{{ icon|safe }}</span>{% endif %}
+    {% if icon and icon_position != 'right' %}<span class="btn__icon" aria-hidden="true">{{ icon|safe }}</span>{% endif %}
     <span class="btn__label">{{ label }}</span>
-    {% if icon and icon_position == 'right' %}<span class="btn__icon">{{ icon|safe }}</span>{% endif %}
+    {% if icon and icon_position == 'right' %}<span class="btn__icon" aria-hidden="true">{{ icon|safe }}</span>{% endif %}
 </button>
 {% endif %}

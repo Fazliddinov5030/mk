@@ -16,8 +16,8 @@ class CertificateService:
     def get_or_create_certificate(enrollment: Enrollment) -> Certificate:
         """Sertifikat yaratish yoki mavjudini qaytarish"""
 
-        # Kurs 100% tugatilganmi?
-        if enrollment.progress_percent < 100:
+        # Kurs tugatilganmi?
+        if not enrollment.is_completed:
             raise ValueError("Kurs hali tugatilmagan")
 
         cert, created = Certificate.objects.get_or_create(

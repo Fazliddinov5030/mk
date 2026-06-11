@@ -13,10 +13,8 @@
             
             <!-- Qidiruv Formasi (course_search url'iga yo'naltirilgan) -->
             <form action="{% url 'course_search' %}" method="GET" class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-lg mx-auto">
-                <input type="text" name="q" placeholder="Kurslarni qidirish..." class="w-full sm:flex-1 px-6 py-4 rounded-xl border border-slate-200 bg-white outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition-all text-slate-900 placeholder-slate-400 shadow-sm">
-                <button type="submit" class="w-full sm:w-auto px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-medium transition-all shadow-sm hover:shadow-md duration-300">
-                    Qidirish
-                </button>
+                <input type="text" name="q" placeholder="Kurslarni qidirish..." class="form-input" />
+                {% include 'components/button.html' with label='Qidirish' button_type='submit' classes='btn btn--primary' %}
             </form>
         </div>
     </section>
@@ -34,10 +32,9 @@
                 <div class="p-6 flex flex-col flex-grow justify-between">
                     <h3 class="text-xl text-slate-900 font-semibold mb-3">{{ course.title }}</h3>
                     <p class="text-slate-500 text-sm font-normal mb-6 line-clamp-2">{{ course.description }}</p>
-                    <p class="text-indigo-600 font-semibold mb-6 text-lg">{{ course.price|default:"Tekin" }} UZS</p>
-                    <a href="{% url 'course_detail' course.id %}" class="w-full inline-block bg-indigo-600 text-white font-medium py-3 rounded-xl text-center hover:bg-indigo-700 shadow-sm hover:shadow-md transition-all duration-300">
-                        Boshlash
-                    </a>
+                    <p class="text-accent font-semibold mb-6 text-lg">{{ course.price|default:"Tekin" }} UZS</p>
+                    {% url 'course_detail' course.id as detail_url %}
+                    {% include 'components/button.html' with is_link=True href=detail_url label='Boshlash' classes='btn btn--primary btn--block' %}
                 </div>
             </div>
             {% empty %}

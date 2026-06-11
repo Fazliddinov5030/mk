@@ -20,10 +20,10 @@ def generate_and_send_certificate(enrollment_id):
             subject=f"Tabriklaymiz! {enrollment.course.title} kursini yakunladingiz",
             body="Sizning elektron sertifikatingiz xatga ilova qilindi. Kelgusi ishlaringizda zafarlar tilaymiz!",
             from_email="noreply@bilimhub.uz",
-            to=[enrollment.user.email],
+            to=[enrollment.student.email],
         )
         email.attach(f'certificate_{cert.certificate_id}.pdf', pdf_response.content, 'application/pdf')
         email.send()
-        logger.info(f"Sertifikat yuborildi: {enrollment.user.email}")
+        logger.info(f"Sertifikat yuborildi: {enrollment.student.email}")
     except Exception as e:
         logger.error(f"Sertifikat generatsiyasi/yuborilishida xatolik: {e}")

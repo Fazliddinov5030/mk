@@ -1,42 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="min-h-[85vh] flex items-center justify-center bg-gray-50 px-4 py-12 font-sans">
-    
-    <!-- O'rtadagi Karta: mayin soya, yumshoq burchaklar -->
-    <div class="w-full max-w-md bg-white shadow-2xl rounded-3xl p-8 sm:p-10 border border-gray-50">
-        
-        <div class="text-center mb-10">
-            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Xush kelibsiz</h1>
-            <p class="mt-3 text-sm text-gray-500">Tizimga kirish uchun ma'lumotlaringizni kiriting</p>
+<div class="auth-root">
+    <div class="auth-card card">
+        <div class="card__header">
+            <h1 class="card__title">Xush kelibsiz</h1>
+            <p class="card__description">Tizimga kirish uchun ma'lumotlaringizni kiriting</p>
         </div>
 
-        <form method="POST" class="space-y-6">
+        <form method="POST" class="" style="margin-top:8px;">
             {% csrf_token %}
-            
-            <!-- Username -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Foydalanuvchi nomi</label>
-                <input type="text" name="username" placeholder="Sizning loginingiz" required class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-100 transition-all" />
+            <div class="form-group">
+                <label class="form-label">Foydalanuvchi nomi</label>
+                <input type="text" name="username" placeholder="Sizning loginingiz" required class="form-input" />
             </div>
 
-            <!-- Password -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Parol</label>
-                <input type="password" name="password" placeholder="••••••••" required class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-100 transition-all" />
+            <div class="form-group">
+                <label class="form-label">Parol</label>
+                <input type="password" name="password" placeholder="••••••••" required class="form-input" />
             </div>
 
-            <!-- Tugma: minimal, toza dizayn -->
-            {% include 'components/button.html' with label='Kirish' button_type='submit' icon="<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-5 h-5'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 7l5 5m0 0l-5 5m5-5H6' /></svg>" icon_position='left' classes="btn btn--primary w-full justify-center rounded-2xl py-3.5 text-sm font-semibold" %}
+            <div style="margin-top:8px;">
+                {% include 'components/button.html' with label='Kirish' button_type='submit' classes='btn btn--primary btn--block btn--lg' %}
+            </div>
         </form>
 
-        <!-- Pastki havolalar: Markazlashgan va toza ko'rinish -->
-        <div class="mt-8 text-center space-y-4">
-            <a href="#" class="block text-sm font-medium text-gray-500 hover:text-indigo-600 transition-colors">Parolni unutdingizmi?</a>
-            <p class="text-sm text-gray-500">
-                Agar hisobingiz yo'q bo'lsa, 
-                <a href="{% url 'register' %}" class="font-semibold text-indigo-600 hover:text-indigo-700 hover:underline transition-colors">Ro'yxatdan o'tish</a>
-            </p>
+        <div class="card__footer" style="flex-direction:column; align-items:center; gap:8px;">
+            <a href="#" style="color:var(--color-text-muted); text-decoration:none;">Parolni unutdingizmi?</a>
+            <p style="color:var(--color-text-muted); font-size:14px;">Agar hisobingiz yo'q bo'lsa, <a href="{% url 'register' %}" style="color:var(--color-accent); font-weight:600;">Ro'yxatdan o'tish</a></p>
         </div>
     </div>
 </div>

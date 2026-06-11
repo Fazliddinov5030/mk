@@ -26,8 +26,8 @@ def course():
 
 class TestEnrollmentModel:
     def test_create_enrollment(self, student_user, course):
-        enrollment = Enrollment.objects.create(user=student_user, course=course)
-        assert enrollment.user == student_user
+        enrollment = Enrollment.objects.create(student=student_user, course=course)
+        assert enrollment.student == student_user
         assert enrollment.course == course
         assert enrollment.is_completed is False
 

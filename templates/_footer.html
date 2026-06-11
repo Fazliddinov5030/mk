@@ -1,9 +1,18 @@
+{% load static %}
 <footer class="bg-gray-50 border-t border-gray-100 font-sans mt-auto">
     <div class="max-w-7xl mx-auto px-6 py-8">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-gray-500 text-sm">
-                &copy; {% now "Y" %} Lumi. Barcha huquqlar himoyalangan.
-            </p>
+            <div class="flex items-center gap-3">
+                <!-- Logotip rasmi -->
+                <img src="{% static 'images/logo.png' %}" alt="M Logo" class="w-8 h-8">
+                <div class="flex flex-col">
+                    <p class="text-gray-500 text-sm">
+                        &copy; {% now "Y" %} Barcha huquqlar himoyalangan.
+                    </p>
+                    <!-- Mualliflik havolasi (kichik yozuvda) -->
+                    <a href="https://www.flaticon.com/free-icons/letter-m" title="letter m icons" class="text-[10px] text-gray-400 hover:text-gray-600 transition-colors">Letter m icons created by ochakov - Flaticon</a>
+                </div>
+            </div>
             <div class="flex space-x-6 text-sm font-medium text-gray-500">
                 <a href="#" class="hover:text-gray-900 transition-colors">Maxfiylik siyosati</a>
                 <a href="#" class="hover:text-gray-900 transition-colors">Foydalanish shartlari</a>

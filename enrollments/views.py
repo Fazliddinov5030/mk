@@ -57,7 +57,7 @@ class EnrollmentViewSet(GenericViewSet):
 
         EnrollmentService.update_progress(
             enrollment=enrollment,
-            lesson_id=serializer.validated_data['lesson'].id,
+            lesson=serializer.validated_data['lesson'],
             watched_seconds=serializer.validated_data['watched_seconds']
         )
         return Response({'message': 'Progress saqlandi'})

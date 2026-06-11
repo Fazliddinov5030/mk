@@ -43,6 +43,7 @@ def course_detail_view(request, pk):
     course = Course(pk, f"Kurs {pk} sarlavhasi", f"Bu {pk}-sonli kursning batafsil tavsifi.", 400000)
     return render(request, 'course_detail.html', {'course': course})
 
+@login_required(login_url='login')
 def dashboard_view(request):
     enrollments = [
         Enrollment(1, "Python dasturlash asoslari", 75),
@@ -54,6 +55,7 @@ def dashboard_view(request):
 def chat_view(request):
     return render(request, 'chat.html')
 
+@login_required(login_url='login')
 def profile_view(request):
     return render(request, 'profile.html')
 
