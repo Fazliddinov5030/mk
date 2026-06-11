@@ -1,44 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="auth-root">
+<div class="auth-page">
     <div class="auth-card card">
         <div class="card__header">
-            <div class="mx-auto mb-2 flex h-14 w-14 items-center justify-center rounded-3xl bg-slate-100 text-slate-700">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M16 12H8m4-4l-4 4 4 4" /></svg>
-            </div>
             <h1 class="card__title">Ro'yxatdan o'tish</h1>
-            <p class="card__description">Minimal va toza dizayn. Ma'lumotlaringizni kiriting.</p>
+            <p class="card__description">Yangi hisob yaratish uchun ma'lumotlarni kiriting.</p>
         </div>
 
-        <form id="registerForm" action="/register/" method="POST" class="" style="margin-top:8px;">
+        <form id="registerForm" action="/register/" method="POST" class="" novalidate>
             {% csrf_token %}
-            <div class="form-group">
+            <div class="form-group input-with-icon">
                 <label class="form-label">Username</label>
-                <input type="text" name="username" placeholder="username123" required class="form-input" />
+                <span class="input-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 1118.879 6.196 9 9 0 015.12 17.804z"/></svg>
+                </span>
+                <input type="text" name="username" placeholder="username123" required class="form-input" autocomplete="username" />
             </div>
 
-            <div class="form-group">
+            <div class="form-group input-with-icon">
                 <label class="form-label">Email</label>
-                <input type="email" name="email" placeholder="you@example.com" required class="form-input" />
+                <span class="input-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m4-4l-4 4 4 4"/></svg>
+                </span>
+                <input type="email" name="email" placeholder="you@example.com" required class="form-input" autocomplete="email" />
             </div>
 
-            <div class="form-group">
+            <div class="form-group input-with-icon">
                 <label class="form-label">Parol</label>
-                <input type="password" name="password" placeholder="••••••••" required class="form-input" />
+                <span class="input-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3V6a3 3 0 10-6 0v2c0 1.657 1.343 3 3 3z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11v6a2 2 0 002 2h10a2 2 0 002-2v-6"/></svg>
+                </span>
+                <input type="password" name="password" placeholder="••••••••" required class="form-input" autocomplete="new-password" />
+            </div>
+
+            <div class="form-group input-with-icon">
+                <label class="form-label">Parolni tasdiqlash</label>
+                <span class="input-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                <input type="password" name="password_confirm" placeholder="••••••••" required class="form-input" autocomplete="new-password" />
             </div>
 
             <div class="form-group">
                 <label class="form-label">Rol</label>
                 <div style="display:flex;gap:12px;">
-                    <label style="display:flex;align-items:center;gap:8px;">
-                        <input type="radio" name="role" value="student" checked />
-                        <span>Talaba</span>
-                    </label>
-                    <label style="display:flex;align-items:center;gap:8px;">
-                        <input type="radio" name="role" value="instructor" />
-                        <span>O'qituvchi</span>
-                    </label>
+                    <label style="display:flex;align-items:center;gap:8px;"><input type="radio" name="role" value="student" checked /> <span>Talaba</span></label>
+                    <label style="display:flex;align-items:center;gap:8px;"><input type="radio" name="role" value="instructor" /> <span>O'qituvchi</span></label>
                 </div>
             </div>
 
@@ -47,9 +55,9 @@
             </div>
         </form>
 
-        <p class="mt-8 text-center text-sm text-slate-500">
-            Allaqachon hisobingiz bormi? <a href="{% url 'login' %}" class="font-semibold text-accent hover:underline transition-colors">Tizimga kirish</a>
-        </p>
+        <div class="card__footer" style="flex-direction:column; align-items:center; gap:8px;">
+            <p style="color:var(--color-text-muted); font-size:14px;">Allaqachon hisobingiz bormi? <a href="{% url 'login' %}" class="font-medium" style="color:var(--color-accent);">Tizimga kirish</a></p>
+        </div>
     </div>
 </div>
 {% endblock %}

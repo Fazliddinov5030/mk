@@ -253,6 +253,39 @@ nav.card {
 .auth-root { min-height:85vh; display:flex; align-items:center; justify-content:center; padding:40px 16px; }
 .auth-card { width:100%; max-width:520px; }
 
+/* Auth page specific minimal layout */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  background: #ffffff; /* page background white for auth pages */
+}
+.auth-page .auth-card {
+  max-width: 520px;
+  width: 100%;
+  padding: 28px 28px;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(16,24,40,0.04);
+}
+.auth-page .card__title { text-align:center; font-size:22px; }
+.auth-page .card__description { text-align:center; color:var(--color-text-muted); margin-bottom:6px; }
+.auth-page .form-group { margin-bottom:14px; }
+.auth-page .card__footer { border-top:0; padding-top:0; margin-top:6px; }
+.auth-page a { color:var(--color-accent); }
+
+/* Input with left icon helper */
+.input-with-icon { position:relative; }
+.input-with-icon .input-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--color-text-muted); pointer-events:none; }
+.input-with-icon .form-input { padding-left:40px; }
+
+/* User menu dropdown */
+.user-menu { position:relative; }
+.user-menu .menu { display:none; }
+.user-menu:hover .menu { display:block; }
+.user-menu button { background:transparent; border:0; }
+
 .card__footer {
   display: flex;
   align-items: center;

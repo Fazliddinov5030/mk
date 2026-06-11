@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -10,8 +10,8 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer()
-        return Response(serializer.data)
+        # GET so'rov (brauzerdan) kelganda frontend HTML sahifaga yo'naltiramiz
+        return redirect('/register/')
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
