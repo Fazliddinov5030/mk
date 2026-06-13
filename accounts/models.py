@@ -17,6 +17,7 @@ class User(AbstractUser):
         max_length=20,
         choices=ROLE_CHOICES,
         default=ROLE_STUDENT,
+        db_index=True,
     )
     bio = models.TextField(blank=True, null=True)
 

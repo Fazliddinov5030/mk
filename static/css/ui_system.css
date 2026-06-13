@@ -286,6 +286,19 @@ nav.card {
 .user-menu:hover .menu { display:block; }
 .user-menu button { background:transparent; border:0; }
 
+/* Lift card when any input inside is focused */
+.auth-card {
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1), box-shadow 220ms cubic-bezier(.2,.9,.3,1);
+}
+.auth-card.is-focused {
+  transform: translateY(-10px);
+  box-shadow: 0 28px 60px rgba(16,24,40,0.12);
+}
+
+@media (max-width: 640px) {
+  .auth-card.is-focused { transform: translateY(-6px); }
+}
+
 .card__footer {
   display: flex;
   align-items: center;

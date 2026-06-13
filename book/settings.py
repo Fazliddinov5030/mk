@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "courses",
     "enrollments",
     "certificates",
+    "corsheaders",
     "rest_framework",
     'django_filters',
     'rest_framework_simplejwt',
@@ -55,6 +56,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -86,19 +89,12 @@ ASGI_APPLICATION = 'book.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-# settings.py ichidagi eski DATABASES qismini mana shu kodga almashtiring:
 DATABASES = {
     'default': {
-        'PORT': config('DB_PORT', default='5432'),
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-        'USER': config('DB_USER', default='postgres'),
-        'PASSWORD': config('DB_PASSWORD', default='2007'),
-        'HOST': config('DB_HOST', default='127.0.0.1'),
-        'PORT': config('DB_PORT', default='5432'),
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -136,6 +132,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 AUTH_USER_MODEL = "accounts.User"
@@ -144,6 +141,17 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '100/day',   # Ro'yxatdan o'tmaganlar uchun kuniga 100 ta so'rov
+        'user': '1000/day'   # Avtorizatsiyadan o'tganlar uchun kuniga 1000 ta so'rov
+    }
 }
 
 from datetime import timedelta
@@ -196,3 +204,16 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+# -----------------------------------------
+# XAVFSIZLIK (SECURITY) SETTINGS
+# -----------------------------------------
+SECURE_CONTENT_TYPE_NOSNIFF = True # Brauzerni turli xil MIME type xujumlaridan himoyalash
+X_FRAME_OPTIONS = 'DENY'           # Clickjacking hujumlaridan himoya (Ilovani Iframe ichida ochishni taqiqlash)
+
+# -----------------------------------------
+# CORS SETTINGS (NEXT.JS FRONTEND UCHUN)
+# -----------------------------------------
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]

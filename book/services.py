@@ -22,8 +22,8 @@ class SearchEngine:
             return Course.objects.annotate(
                 search=search_vector,
                 rank=SearchRank(search_vector, search_query)
-            ).filter(search=search_query).order_by('-rank')
+            ).filter(search=search_query).select_related('instructor').order_by('-rank')
 
         return Course.objects.filter(
             Q(title__icontains=query_string) | Q(description__icontains=query_string)
-        ).order_by('-title__icontains', 'title')
+        ).select_related('instructor').order_by('-title__icontains', 'title')

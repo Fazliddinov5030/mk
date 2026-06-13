@@ -1,31 +1,45 @@
-<nav class="bg-white border-b border-[#E9E9E7] sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-        <a href="/" class="text-base font-semibold text-[#37352F]">BilimHub</a>
+<nav class="bg-white border-b border-[#E5E7EB] sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2 text-[#111827] hover:text-[#6366F1] transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7 text-[#6366F1]">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+            <span class="text-xl font-bold tracking-tight">BilimHub</span>
+        </a>
 
-        <div class="hidden md:flex items-center gap-6">
-            <a href="{% url 'course_list' %}" class="text-sm text-[#787774] hover:text-[#37352F] transition-colors">Kurslar</a>
+        <!-- Havolalar -->
+        <div class="hidden md:flex items-center gap-8">
+            <!-- Active holati qo'lda yozilgan: text-[#6366F1] border-b-2 border-[#6366F1] pb-1 -->
+            <a href="{% url 'course_list' %}" class="text-sm font-medium text-[#6B7280] hover:text-[#111827] transition-colors">Kurslar</a>
+            
             {% if user.is_authenticated %}
-                <a href="{% url 'dashboard' %}" class="text-sm text-[#787774] hover:text-[#37352F] transition-colors">Dashboard</a>
+                <a href="{% url 'dashboard' %}" class="text-sm font-medium text-[#6B7280] hover:text-[#111827] transition-colors">Dashboard</a>
                 <div class="user-menu" style="position:relative;">
-                    <button class="flex items-center gap-2 text-sm text-[#787774] hover:text-[#37352F] transition-colors bg-transparent border-0 cursor-pointer">
-                        <div class="w-7 h-7 rounded-full bg-[#E9E9E7] flex items-center justify-center text-[#37352F] font-medium text-xs">
+                    <button class="flex items-center gap-2 text-sm font-medium text-[#374151] hover:text-[#111827] transition-colors bg-transparent border-0 cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-[#EEF2FF] flex items-center justify-center text-[#6366F1] font-bold text-xs border border-[#E5E7EB]">
                             {% with initial=user.first_name|default:user.username %}{{ initial|slice:":1"|upper }}{% endwith %}
                         </div>
-                        <span class="font-medium">{{ user.get_full_name|default:user.username }}</span>
+                        <span>{{ user.get_full_name|default:user.username }}</span>
                     </button>
-                    <div class="menu" style="display:none; position:absolute; right:0; top: calc(100% + 8px); background:#fff; border:1px solid #eef0ee; box-shadow:0 8px 24px rgba(16,24,40,0.06); border-radius:8px; min-width:160px; z-index:60;">
-                        <a href="{% url 'profile' %}" class="block px-4 py-2 text-sm text-[#37352F] hover:bg-[#F7F7F5]">Profil</a>
-                        <a href="{% url 'dashboard' %}" class="block px-4 py-2 text-sm text-[#37352F] hover:bg-[#F7F7F5]">Dashboard</a>
-                        <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-[#37352F] hover:bg-[#F7F7F5]">Chiqish</a>
+                    
+                    <!-- Dropdown -->
+                    <div class="menu hidden absolute right-0 top-[calc(100%+8px)] w-48 bg-white border border-[#E5E7EB] rounded-xl shadow-lg z-50 py-1 overflow-hidden">
+                        <a href="{% url 'profile' %}" class="block px-4 py-2 text-sm text-[#374151] hover:bg-[#F9FAFB] hover:text-[#6366F1]">Profil</a>
+                        <a href="{% url 'dashboard' %}" class="block px-4 py-2 text-sm text-[#374151] hover:bg-[#F9FAFB] hover:text-[#6366F1]">Dashboard</a>
+                        <div class="border-t border-[#E5E7EB] my-1"></div>
+                        <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-[#EF4444] hover:bg-red-50">Chiqish</a>
                     </div>
                 </div>
             {% endif %}
         </div>
 
+        <!-- Auth Buttons -->
         <div class="flex items-center gap-3">
             {% if not user.is_authenticated %}
-                <a href="{% url 'login' %}" class="text-sm font-medium text-[#37352F] hover:bg-[#F1F1EF] rounded-md px-3 py-1.5 transition-colors">Kirish</a>
-                <a href="{% url 'register' %}" class="bg-[#2F3437] text-white text-sm font-medium rounded-md px-4 py-1.5 hover:bg-black transition-colors">Ro'yxatdan o'tish</a>
+                <a href="{% url 'login' %}" class="text-[#374151] hover:bg-[#F9FAFB] rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-150">Kirish</a>
+                <a href="{% url 'register' %}" class="bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-150 shadow-sm">Ro'yxatdan o'tish</a>
             {% endif %}
         </div>
     </div>
