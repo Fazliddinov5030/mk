@@ -31,6 +31,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 # When DEBUG is True we allow all hosts to simplify local development.
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost')
 ALLOWED_HOSTS = [h.strip() for h in ALLOWED_HOSTS.split(',') if h.strip()]
+
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 
@@ -89,12 +90,25 @@ ASGI_APPLICATION = 'book.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+DB_ENGINE = config('DB_ENGINE', default='django.db.backends.sqlite3')
+if DB_ENGINE == 'django.db.backends.sqlite3':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / config('SQLITE_NAME', default='db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': DB_ENGINE,
+            'NAME': config('DB_NAME', default='book_lms'),
+            'USER': config('DB_USER', default='postgres'),
+            'PASSWORD': config('DB_PASSWORD', default=''),
+            'HOST': config('DB_HOST', default='127.0.0.1'),
+            'PORT': config('DB_PORT', default='5432'),
+        }
+    }
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -136,6 +150,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 AUTH_USER_MODEL = "accounts.User"
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -215,5 +230,5 @@ X_FRAME_OPTIONS = 'DENY'           # Clickjacking hujumlaridan himoya (Ilovani I
 # CORS SETTINGS (NEXT.JS FRONTEND UCHUN)
 # -----------------------------------------
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    origin.strip() for origin in config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000').split(',') if origin.strip()
 ]

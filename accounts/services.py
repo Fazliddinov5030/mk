@@ -8,7 +8,7 @@ class UserService:
     def register_user(username, email, password, role='student'):
         if role == 'teacher':
             role = 'instructor'
-        allowed_roles = {'student', 'instructor', 'admin'}
+        allowed_roles = {'student', 'instructor'}
         if role not in allowed_roles:
             role = 'student'
 
@@ -18,8 +18,8 @@ class UserService:
         if User.objects.filter(username=username).exists():
             raise UserAlreadyExistsError("Bu login bilan ro'yxatdan o'tgan foydalanuvchi mavjud")
 
-        user = User.objects.create_user(username=username, email=email, password=password)
-        if hasattr(user, 'role'):
-            user.role = role
-        user.save()
+        if User.objects.filter(email=email).exists():
+            raise UserAlreadyExistsError("Bu email bilan ro'yxatdan o'tgan foydalanuvchi mavjud")
+
+        user = User.objects.create_user(username=username, email=email, password=password, role=role)
         return user

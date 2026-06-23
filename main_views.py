@@ -61,9 +61,17 @@ def login_view(request):
 def register_view(request):
     if request.method == 'POST':
         username = request.POST.get('username', '').strip()
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+        email = request.POST.get('email', '').strip()
+        password = request.POST.get('password', '')
         role = request.POST.get('role', 'student').strip()
+
+        if not username or not email or not password:
+            messages.error(request, 'Iltimos, barcha maydonlarni to‘ldiring.')
+            return render(request, 'register.html')
+
+        if len(password) < 8:
+            messages.error(request, 'Parol kamida 8 ta belgidan iborat bo‘lishi kerak.')
+            return render(request, 'register.html')
 
         try:
             UserService.register_user(username, email, password, role)

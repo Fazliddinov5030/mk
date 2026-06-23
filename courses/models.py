@@ -28,6 +28,27 @@ class Course(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     description = models.TextField()
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            from django.utils.text import slugify
+            base_slug = slugify(self.title)[:240]
+            if not base_slug:
+                base_slug = 'course'
+            unique_slug = base_slug
+            counter = 1
+            qs = Course.objects.filter(slug=unique_slug)
+            if self.pk:
+                qs = qs.exclude(pk=self.pk)
+            while qs.exists():
+                unique_slug = f"{base_slug}-{counter}"
+                counter += 1
+                qs = Course.objects.filter(slug=unique_slug)
+                if self.pk:
+                    qs = qs.exclude(pk=self.pk)
+            self.slug = unique_slug
+        super().save(*args, **kwargs)
+
     price = models.DecimalField(max_digits=8, decimal_places=2)
     status = models.CharField(
         max_length=20,

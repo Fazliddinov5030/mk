@@ -4,6 +4,10 @@ from .models import User
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, min_length=8, style={'input_type': 'password'})
     email = serializers.EmailField(required=True)
+    role = serializers.ChoiceField(choices=[
+        (User.ROLE_STUDENT, 'Student'),
+        (User.ROLE_INSTRUCTOR, 'Instructor')
+    ], default=User.ROLE_STUDENT)
 
     class Meta:
         model = User
@@ -14,9 +18,9 @@ class RegisterSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("A user with that email already exists.")
         return value
 
-    def validate_role(self, value):
-        if value == User.ROLE_ADMIN:
-            raise serializers.ValidationError("Cannot register as an admin through this API.")
+    def validate_username(self, value):
+        if User.objects.filter(username=value).exists():
+            raise serializers.ValidationError("This username is already taken.")
         return value
 
     def create(self, validated_data):
